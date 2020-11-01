@@ -8,7 +8,7 @@
 
 La idea de este repositorio es que sea un compilado de consideraciones relevantes a git y github que sirva de ayuda para quienes se encuentran empezando en este mundo. Espero que la misma pueda ser de mucha ayuda.
 
-Cualquier tipo de modificaciones comentarios o sugerencias son bienvenidas mediante pull request.
+Recomiendo que a aquel que le interese el repositorio realice un fork del mismo para poder modificarlo a su gusto, cualquier tipo de modificaciones comentarios o sugerencias son bienvenidas mediante pull request.
 
 ## ¿Qué es un sistema de control de versiones?
 
