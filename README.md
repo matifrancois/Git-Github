@@ -1,4 +1,8 @@
-# Git y GitHub
+<h1 align="center">
+  <br>
+  Git y GitHub
+  <br>
+</h1>
 
 # Introducción a Git
 
@@ -209,31 +213,35 @@ Por seguridad y practicidad, para trabajar con repositorios remotos lo ideal es 
 
 ## Llaves SSH
 
-1. Generar las llaves SSH. Si bien no es obligatorio, se recomienda proteger la llave privada con una contraseña cuando lo solicita el proceso de generación.
+1: Generar las llaves SSH. Si bien no es obligatorio, se recomienda proteger la llave privada con una contraseña cuando lo solicita el proceso de generación.
 ssh-keygen -t rsa -b 4096 -C &lt;[tu@email.com](mailto:tu@email.com)&gt;
+
 **-t** rsa es el algoritmo elegido de cifrado (acrónimo de Rivest-Shamir-Adleman creadores del algoritmo)
+
 **-b** 4096 son los bits que tendrá la llave. 2048 suele ser suficiente pero con 4096 se extrema la seguridad.
+
 **-C** &lt;comentario a elección&gt;
-2. Terminar de configurar según sistema operativo.
+
+2: Terminar de configurar según sistema operativo.
   1. En Windows y Linux:
- # Encender el &quot;servidor&quot; de llaves SSH local:
+    Encender el &quot;servidor&quot; de llaves SSH local:
 eval $(ssh-agent -s)
- # Añadir la llave privada SSH a este &quot;servidor&quot;:
+    Añadir la llave privada SSH a este &quot;servidor&quot;:
 ssh-add &lt;ruta-a-la-llave-privada&gt;
   2. En Mac:
- # Encender el &quot;servidor&quot; de llaves SSH local:
+  Encender el &quot;servidor&quot; de llaves SSH local:
 eval &quot;$(ssh-agent -s)&quot;
- # Para versiones de OSX superior a Mac Sierra (v10.12)
- # se debe crear o modificar un archivo &quot;config&quot; en la carpeta
- # del usuario con el siguiente contenido (respetar las mayúsculas):
+  Para versiones de OSX superior a Mac Sierra (v10.12)
+  se debe crear o modificar un archivo &quot;config&quot; en la carpeta
+  del usuario con el siguiente contenido (respetar las mayúsculas):
 Host \*
  AddKeysToAgent yes
  UseKeychain yes
  IdentityFile
  ruta-a-la-llave-privada
-# Añadir la llave privada SSH al &quot;servidor&quot; de llaves SSH local
- # (en caso de error se puede ejecutar este mismo comando
- # pero sin el argumento -K):
+ Añadir la llave privada SSH al &quot;servidor&quot; de llaves SSH local
+ (en caso de error se puede ejecutar este mismo comando
+ pero sin el argumento -K):
 ssh-add -K &lt;ruta-a-la-llave-privada&gt;
 
 ## Conexión a GitHub con SSH
@@ -244,7 +252,7 @@ Para esto entrar a la Configuración de Llaves SSH en GitHub, crear una nueva ll
 
 Luego actualizar en nuestra pc la URL del repositorio remoto, cambiando la URL con HTTPS por la URL con SSH:
 
-git remote set-url origin \&lt;url-ssh-del-repositorio-en-github\&gt;
+git remote set-url origin &lt;url-ssh-del-repositorio-en-github&gt;
 
 ## Tags y versiones en Git y GitHub
 
@@ -255,7 +263,7 @@ En GitHub esto crea releases, versiones descargables del proyecto en ese preciso
 Comandos para trabajar con etiquetas:
 
 - Crear un nuevo tag y asignarlo a un commit:
-git tag -a \&lt;nombre-del-tag\&gt; -m \&lt;mensaje del commit\&gt; \&lt;id-del-commit-al-que-asignar-la-etiqueta\&gt;
+git tag -a &lt;nombre-del-tag&gt; -m &lt;mensaje del commit&gt; &lt;id-del-commit-al-que-asignar-la-etiqueta&gt;
 - Borrar un tag en el repositorio local:
 git tag -d nombre-del-tag
 - Listar los tags de nuestro repositorio local:
@@ -320,7 +328,7 @@ GitHub tiene un servicio de hosting gratis llamado GitHub Pages, se puede tener 
 
 Con rebase se puede recoger todos los cambios confirmados en una rama y ponerlos sobre otra.
 
-![](RackMultipart20201101-4-23rntv_html_29ff15bb674cdabc.jpg)
+![](images/rebase.png)
 
 1. Cambiar a la rama que queremos traer los cambios
 git checkout experiment
@@ -334,7 +342,7 @@ git rebase master
 
 Sirve para cuando se necesita recordar el estado actual del directorio de trabajo y del índice, pero se requiere volver y limpiar el directorio de trabajo.
 
-![](RackMultipart20201101-4-23rntv_html_61602f5c31c5e224.png)
+![](images/stash.png)
 
 - git stash
  guarda las modificaciones locales en memoria y revierte el directorio de trabajo para coincidir con el estado del commit de HEAD.
@@ -362,11 +370,11 @@ Un caso de uso válido sería el siguiente:
 
 Se encuentra un problema en la rama de producción, ésta tiene modificaciones hechas que no están en la rama de desarrollo (commit G), se desarrolla un fix de urgencia (commit H).
 
-![](RackMultipart20201101-4-23rntv_html_e3d7f9431abb0099.png)
+![](images/cherry-pick.png)
 
 Si se requiere incorporar el fix a la rama de desarrollo pero **sin las modificaciones del commit G** , se realiza un cherry-pick del commit H a desarrollo (commit H&#39;).
 
-![](RackMultipart20201101-4-23rntv_html_7e1cf39c7d2fc93b.png)
+![](images/cherry-pick2.png)
 
 | **&quot;Cherry-pick suele ser una mala práctica** porque significa que estamos reconstruyendo la historia. Debe usarse como último recurso. **&quot;** |
 | --- |
@@ -375,7 +383,7 @@ Si se requiere incorporar el fix a la rama de desarrollo pero **sin las modifica
 
 Amend (remendar - reconstruir) agrega cambios al último commit, tanto de archivos como del mensaje.
 
-- git add \&lt;archivos a agregar\&gt;
+- git add &lt;archivos a agregar&gt;
  git commit --amend
 
 ## Buscar en archivos y commits de Git con Grep y log
@@ -388,21 +396,21 @@ A medida que nuestro proyecto se hace grande vamos a querer buscar ciertas cosas
  indicará en qué línea está la palabra color.
 - git grep -c color
  indicará cuántas veces se repite la palabra color y en qué archivo.
-- git grep -c &quot;\&lt;p\&gt;&quot;
- indicará cuántas veces se utiliza el atributo \&lt;p\&gt; de HTML
+- git grep -c &quot;&lt;p&gt;&quot;
+ indicará cuántas veces se utiliza el atributo &lt;p&gt; de HTML
 
 ## Reset y Reflog: &quot;Úsese en caso de emergencia&quot; 🧯
 
 ¿Qué pasa cuando todo se rompe y no sabemos qué está pasando?
 
 - Volver al estado en que el proyecto funcionaba
-git reset \&lt;HashDelHEAD\&gt;
+git reset &lt;HashDelHEAD&gt;
 - Mostrar todos los cambios del HEAD.
 git reflog
 - Mantener lo que haya en staging
-git reset --soft \&lt;HashDelHEAD\&gt;
+git reset --soft &lt;HashDelHEAD&gt;
 - Resetear absolutamente todo incluyendo lo que haya en staging
-git reset --hard \&lt;HashDelHEAD\&gt;
+git reset --hard &lt;HashDelHEAD&gt;
 
 | 🚨 **&quot;reset es una mala práctica**. Debe ser el último recurso. **&quot;** |
 | --- |
