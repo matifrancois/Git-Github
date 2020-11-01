@@ -46,7 +46,12 @@ Al ejecutar el comando &quot;git init&quot; (comando para iniciar un repositorio
 - Se preparan los archivos añadiéndolos al área de preparación o staging. &#39;git add&#39;
 - Se confirman los cambios: las instantáneas de los archivos que están en el área de staging se almacenan de forma permanente en el directorio de Git. &#39;git commit&#39;
 
-![](images/local_operations.PNG)
+<h3 align="center">
+  <br>
+  <img src="images/local_operations.PNG" alt="Local operations" width="350">
+  <br>
+</h3>
+
 
 ## Estados de un archivo
 
@@ -123,7 +128,12 @@ git rm no puede usarse así nomás. Se debe usar uno de los flags para indicar a
 - git reset --soft: Vuelve el branch al estado del commit especificado, manteniendo los archivos en el directorio de trabajo y lo que haya en staging considerando todo como nuevos cambios. Así podemos aplicar las últimas actualizaciones a un nuevo commit.
 - git reset --hard: Borra absolutamente todo. Toda la información de los commits y del área de staging se borra del historial.
 
-![](images/git-reset-mode.PNG)
+<h3 align="center">
+  <br>
+  <img src="images/git-reset-mode.PNG" alt="git reset mode" width="350">
+  <br>
+</h3>
+
 
 - git reset HEAD: No borra los archivos ni sus modificaciones, sólo los saca del área de staging, de forma que los últimos cambios de estos archivos no se envíen al último commit. Si se cambia de opinión se los puede incluir nuevamente con git add.
 
@@ -190,13 +200,23 @@ Dentro de cada archivo en la etapa que se ha de modificar aparecen diferentes op
 
 En la siguiente imagen se puede ver mejor lo explicado
 
-![](images/vscode.PNG)
+<h3 align="center">
+  <br>
+  <img src="images/vscode.PNG" alt="Visual Studio Code" width="450">
+  <br>
+</h3>
+
 
 Una vez resueltos los confictos en todos los archivos se han de guardar los archivos modificados y commitear los mismos, este proceso se puede realizar desde consola o con ayuda del control de versiones dentro de Visual Studio Code.
 
 A continuacion se muestra un gif que muestra como se pueden comparar los cambios y resolverlos de esta manera.
 
-![](images/merge-conflict-solve-vs-code.gif)
+<h3 align="center">
+  <br>
+  <img src="images/merge-conflict-solve-vs-code.gif" alt="Visual Studio Code" width="450">
+  <br>
+</h3>
+
 
 ## Trabajar con un repositorio remoto
 
@@ -328,7 +348,11 @@ GitHub tiene un servicio de hosting gratis llamado GitHub Pages, se puede tener 
 
 Con rebase se puede recoger todos los cambios confirmados en una rama y ponerlos sobre otra.
 
-![](images/rebase.png)
+<h3 align="center">
+  <br>
+  <img src="images/rebase.png" alt="rebase" width="350">
+  <br>
+</h3>
 
 1. Cambiar a la rama que queremos traer los cambios
 git checkout experiment
@@ -342,7 +366,12 @@ git rebase master
 
 Sirve para cuando se necesita recordar el estado actual del directorio de trabajo y del índice, pero se requiere volver y limpiar el directorio de trabajo.
 
-![](images/stash.png)
+<h3 align="center">
+  <br>
+  <img src="images/stash.png" alt="stash" width="350">
+  <br>
+</h3>
+
 
 - git stash
  guarda las modificaciones locales en memoria y revierte el directorio de trabajo para coincidir con el estado del commit de HEAD.
@@ -364,17 +393,26 @@ git clean -f
 
 Cherry-pick trae las modificaciones realizadas en un commit específico de otra rama.
 
-git cherry-pick \&lt;IDCommit\&gt;
+git cherry-pick &lt;IDCommit&gt;
 
 Un caso de uso válido sería el siguiente:
 
 Se encuentra un problema en la rama de producción, ésta tiene modificaciones hechas que no están en la rama de desarrollo (commit G), se desarrolla un fix de urgencia (commit H).
 
-![](images/cherry-pick.png)
+<h3 align="center">
+  <br>
+  <img src="images/cherry-pick.png" alt="cherry-pick" width="350">
+  <br>
+</h3>
+
 
 Si se requiere incorporar el fix a la rama de desarrollo pero **sin las modificaciones del commit G** , se realiza un cherry-pick del commit H a desarrollo (commit H&#39;).
 
-![](images/cherry-pick2.png)
+<h3 align="center">
+  <br>
+  <img src="images/cherry-pick2.png" alt="cherry-pick" width="350">
+  <br>
+</h3>
 
 | **&quot;Cherry-pick suele ser una mala práctica** porque significa que estamos reconstruyendo la historia. Debe usarse como último recurso. **&quot;** |
 | --- |
