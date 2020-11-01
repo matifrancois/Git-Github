@@ -6,6 +6,10 @@
 
 # Introducción a Git
 
+La idea de este repositorio es que sea un compilado de consideraciones relevantes a git y github que sirva de ayuda para quienes se encuentran empezando en este mundo. Espero que la misma pueda ser de mucha ayuda.
+
+Cualquier tipo de modificaciones comentarios o sugerencias son bienvenidas mediante pull request.
+
 ## ¿Qué es un sistema de control de versiones?
 
 El SCV o VCS (por sus siglas en inglés) es un **sistema que registra los cambios realizados sobre un archivo o conjunto de archivos a lo largo del tiempo** , de modo que puedas llevar el historial del ciclo de vida de un proyecto, comparar cambios a lo largo del tiempo, ver quién los realizó o revertir el proyecto entero a un estado anterior. Cualquier tipo de archivo que se encuentre en un ordenador puede ponerse bajo control de versiones.
@@ -227,6 +231,24 @@ A continuacion se muestra un gif que muestra como se pueden comparar los cambios
 - git fetch: importa los archivos remotos al repositorio local pero no al working directory.
 - git merge: una vez hecho el git fetch, hace falta hacer un git merge para que los archivos importados aparezcan en el working directory.
 
+# Gitignore
+
+En el repositorio se puede anexar un archivo denominado gitignore, el mismo permite no considerar diferentes archivos a la hora de subir los mismos al repositorio remoto (Github), de esta manera para implementarlo se ha de crear un archivo que se llame .gitignore, es decir con esa extension y sin nombre asociado, de esta manera se especifica el archivo donde se va a indicar qué archivos no se han de subir al respositorio remoto.
+
+Esto resulta muy util cuando se tienen por ejemplo listas con los que haceres que se han de realizar o por ejemplo carpetas con archivos que son muy pesados y de todas maneras el usuario puede descargar o crear por su cuenta por ejemplo la carpeta node_modules en algunos proyectos.
+
+De esta manera escribiendo dentro del archivo se puede especificar qué archivos no se han de tener en consideración.
+
+## Comandos basicos de Gitignore
+
+- *.nombre_de_la_extension: Con este comando se puede especificar que todos los archivos con esta extensión no se consideren. por ejemplo: &quot;*.jpg&quot; para evitar que se contemplen los archivos de extension jpg (imagenes) presentes en la carpeta local.
+
+- /nombre_de_carpeta: Este comando nos permite evitar la carga de la carpeta y el control de versiones de la misma al repositorio, especialmente util para carpetas como node_modules
+
+- \# Esto es un comentario: El caracter \# te permite introducir lineas de comentarios dentro del archivo gitignore
+
+- !/cosa_a_no_ignorar: Este comando sirve para considerar la carga de cosas en el repositorio, cuando estas cosas se encuentran dentro de por ejemplo una carpeta que ignoramos su contenido, es decir permite realizar excepciones dentro de carpetas que ignoramos.
+
 # GitHub - Repositorios remotos
 
 Por seguridad y practicidad, para trabajar con repositorios remotos lo ideal es no enviar las credenciales de loging cada vez que se transfiera información con la plataforma, para eso se configuran las llaves SSH, siendo el método más seguro.
@@ -368,7 +390,7 @@ Sirve para cuando se necesita recordar el estado actual del directorio de trabaj
 
 <h3 align="center">
   <br>
-  <img src="images/stash.PNG" alt="stash" width="350">
+  <img src="images/Stash.PNG" alt="stash" width="350">
   <br>
 </h3>
 
@@ -452,3 +474,9 @@ git reset --hard &lt;HashDelHEAD&gt;
 
 | 🚨 **&quot;reset es una mala práctica**. Debe ser el último recurso. **&quot;** |
 | --- |
+
+## Agradecimientos
+
+Este repositorio es la migración a Markdown de los apuntes de Franco Coloccini previamente realizados en google docs, de esta manera se permite el forkeado y modificacion de los mismos. 
+
+A estos apuntes se le hicieron y continúan haciendo modificaciones para anexar más contenido relevante, como ser funciones que no se contemplaron o consideraciones extras como por ejemplo la ampliación de la sección de resolución de conflictos al realizar merge entre otras o el anexo de gitignore una herramienta muy util a la hora de trabajar con repositorios remotos.
