@@ -12,14 +12,14 @@ Git es un SCV distribuido, diseñado por Linus Torvalds, pensando en la eficienc
 
 Se obtiene su mayor eficiencia con archivos de texto plano, ya que con archivos binarios no puede guardar solo los cambios, sino que debe volver a grabar el archivo completo ante cada modificación, por mínima que sea, lo que hace que incremente demasiado el tamaño del repositorio.
 
-| **&quot;Guardar archivos binarios** en el repositorio de git **es una mala práctica** , solo debería guardarse archivos pequeños (como logos) que no sufran casi modificaciones durante la vida del proyecto. Los binarios deben guardarse en un CDN **&quot;** |
+| **&quot;Guardar archivos binarios** en el repositorio de git **es una mala práctica** , solo debería guardarse archivos (como logos) que no sufran casi modificaciones durante la vida del proyecto. Los binarios deben guardarse en un CDN (Content Delivery Network)**&quot;** |
 | --- |
 
 ## ¿Qué es Github?
 
-Es una plataforma de desarrollo colaborativo (forja) para alojar proyectos utilizando el sistema de control de versiones Git. Se utiliza principalmente para la creación de código fuente de programas de computadora.
+Es una plataforma de desarrollo colaborativo (forja) para alojar proyectos de manera remota utilizando el sistema de control de versiones Git. Se utiliza principalmente para la creación de código fuente de programas de computadora.
 
-Github puede considerarse como la red social de código para los programadores y en muchos casos es visto como tu curriculum vitae.
+Github puede considerarse como una red social de código para programadores y en muchos casos es visto como tu currículum vitae o portafolio.
 
 # Comandos y Conceptos Básicos de Git
 
@@ -34,7 +34,7 @@ Github puede considerarse como la red social de código para los programadores y
 Al ejecutar el comando &quot;git init&quot; (comando para iniciar un repositorio git) ocurren dos cosas:
 
 - Se crea una carpeta .git. El cual es el repositorio local donde Git almacena los metadatos y la base de datos de objetos para el proyecto. Es la parte más importante de Git, y **es lo que se copia cuando clonas** un repositorio desde otro ordenador.
-- Se crea un archivo sencillo que define el staging area, generalmente está contenido en el directorio de Git, que almacena información acerca de lo que va a ir en tu próxima confirmación.
+- Se crea un archivo sencillo que define el staging area, generalmente está contenido en el directorio de Git, que almacena información acerca de lo que va a ir en tu próxima confirmación (commit).
 
 ## Ciclo básico de trabajo en Git
 
@@ -42,7 +42,7 @@ Al ejecutar el comando &quot;git init&quot; (comando para iniciar un repositorio
 - Se preparan los archivos añadiéndolos al área de preparación o staging. &#39;git add&#39;
 - Se confirman los cambios: las instantáneas de los archivos que están en el área de staging se almacenan de forma permanente en el directorio de Git. &#39;git commit&#39;
 
-![](RackMultipart20201101-4-23rntv_html_379bb473550d4533.png)
+![](images/local_operations.PNG)
 
 ## Estados de un archivo
 
@@ -54,7 +54,7 @@ Al ejecutar el comando &quot;git init&quot; (comando para iniciar un repositorio
 
 ## ¿Qué es un Branch y cómo funciona un Merge en Git?
 
-Todos los commits se aplican sobre una rama. Por convención se empieza a trabajar en la rama master (puede cambiarse el nombre de ser necesario) y se crean nuevas a partir de esta, para crear flujos de trabajo independientes.
+Todos los commits se aplican sobre una rama. Por convención se empieza a trabajar en la rama master (puede cambiarse el nombre de ser necesario) y se crean nuevas a partir de esta, para crear flujos de trabajo independientes. Esto es muy util para mantener el flujo de trabajo entre los distintos actores del repositorio permitiendo por ejemplo mantener la rama master lo más limpia de errores mientras se ejecutan pruebas o añadidos al software.
 
 Crear una nueva rama implica copiar un commit (de cualquier rama), pasarlo a otro lado (a otra rama) y continuar el trabajo de una parte específica de nuestro proyecto sin afectar el flujo de trabajo principal (que continúa en la rama master).
 
@@ -62,17 +62,20 @@ Crear una nueva rama implica copiar un commit (de cualquier rama), pasarlo a otr
 - Todo lo que esté en la rama _&quot;master&quot;_ va a producción.
 
 - Las nuevas features y experimentos se realizan en una rama _&quot;development&quot;_ que se unen a master cuando estén listas.
-- Los issues o errores se solucionan en una rama _&quot;hotfix&quot;_ para unirse a master tan pronto como sea posible.
- |
-| --- |
+- Los issues o errores se solucionan en una rama _&quot;hotfix&quot;_ para unirse a master tan pronto como sea posible. Esta rama también se suele llamar Bug Fixing.
 
-##
 
-Se puede crear todas las ramas y commits que se requieran para mantener ordenado el proyecto. Incluso puede aprovechar el registro de cambios de Git para crear ramas, traer versiones viejas del código, arreglarlas y combinarlas de nuevo para mejorar el proyecto.
+Se pueden crear todas las ramas y commits que se requieran para mantener ordenado el proyecto. Incluso puede aprovechar el registro de cambios de Git para crear ramas, traer versiones viejas del código, arreglarlas y combinarlas de nuevo para mejorar el proyecto.
 
-Se debe tener en cuenta al combinar ramas los conflictos que puedan generarse. Git siempre intentará unir los cambios automáticamente, pero no siempre funciona bien, eventualmente se deben resolver los conflictos a mano.
+Se debe tener en cuenta al combinar ramas los conflictos que puedan generarse, al decir conflictos nos referimos a que al unir dos versiones del proyecto exite la posibilidad (muy posible) de que dos archivos que queramos unir tengan cosas que difieren entre sí y que no son reparables automaticamente por git ya que no sabe cual de los cambios es el correcto. Git siempre intentará unir los cambios automáticamente, pero no siempre funciona bien, eventualmente cuando esto ocurra, se deben resolver los conflictos a mano.
 
 ## Comandos básicos
+
+### Configuración inicial de git
+
+- git config --global user.email \&lt;tu@email.com\&gt;: configura un email.
+- git config --global user.name \&lt;Nombre como se verá en los commits\&gt;: configura un nombre.
+- git config --list: lista las configuraciones.
 
 ### Crear repositorios y commits
 
@@ -82,9 +85,7 @@ Se debe tener en cuenta al combinar ramas los conflictos que puedan generarse. G
 - git commit -am &quot;commit description&quot;: añade al staging area y hace un commit mediante un solo comando. (No funciona con archivos nuevos)
 - git status: ofrece una descripción del estado de los archivos (untracked, ready to commit, nothing to commit).
 - git rm (. -r, filename) (--cached): remueve los archivos del index.
-- git config --global user.email \&lt;tu@email.com\&gt;: configura un email.
-- git config --global user.name \&lt;Nombre como se verá en los commits\&gt;: configura un nombre.
-- git config --list: lista las configuraciones.
+
 
 ### Analizar cambios en los archivos de un proyecto Git
 
