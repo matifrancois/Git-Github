@@ -85,7 +85,7 @@ Se debe tener en cuenta al combinar ramas los conflictos que puedan generarse, a
 - git commit -am &quot;commit description&quot;: añade al staging area y hace un commit mediante un solo comando. (No funciona con archivos nuevos)
 - git status: ofrece una descripción del estado de los archivos (untracked, ready to commit, nothing to commit).
 - git rm (. -r, filename) (--cached): remueve los archivos del index.
-
+- git clone https://github.com/matifrancois/Git-Github.git : Clonar un repositorio remoto en tu computadora local.
 
 ### Analizar cambios en los archivos de un proyecto Git
 
