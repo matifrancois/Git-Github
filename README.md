@@ -350,7 +350,7 @@ Con rebase se puede recoger todos los cambios confirmados en una rama y ponerlos
 
 <h3 align="center">
   <br>
-  <img src="images/rebase.png" alt="rebase" width="350">
+  <img src="images/rebase.PNG" alt="rebase" width="350">
   <br>
 </h3>
 
@@ -368,7 +368,7 @@ Sirve para cuando se necesita recordar el estado actual del directorio de trabaj
 
 <h3 align="center">
   <br>
-  <img src="images/stash.png" alt="stash" width="350">
+  <img src="images/stash.PNG" alt="stash" width="350">
   <br>
 </h3>
 
@@ -401,7 +401,7 @@ Se encuentra un problema en la rama de producción, ésta tiene modificaciones h
 
 <h3 align="center">
   <br>
-  <img src="images/cherry-pick.png" alt="cherry-pick" width="350">
+  <img src="images/cherry-pick.PNG" alt="cherry-pick" width="350">
   <br>
 </h3>
 
@@ -410,7 +410,7 @@ Si se requiere incorporar el fix a la rama de desarrollo pero **sin las modifica
 
 <h3 align="center">
   <br>
-  <img src="images/cherry-pick2.png" alt="cherry-pick" width="350">
+  <img src="images/cherry-pick2.PNG" alt="cherry-pick" width="350">
   <br>
 </h3>
 
