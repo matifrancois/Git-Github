@@ -93,13 +93,13 @@ Se debe tener en cuenta al combinar ramas los conflictos que puedan generarse, a
 - git log --stat: además de listar los commits, muestra la cantidad de bytes añadidos y eliminados en cada uno de los archivos modificados.
 - git log --all --graph --decorate --oneline: muestra de manera comprimida toda la historia del repositorio de manera gráfica y embellecida.
 - git show filename: permite ver la historia de los cambios en un archivo.
-- git diff \&lt;commit1\&gt; \&lt;commit2\&gt;: compara diferencias entre en cambios confirmados.
+- git diff &lt;commit1&gt; &lt;commit2&gt;: compara diferencias entre en cambios confirmados.
 
 ### Volver en el tiempo con branches y checkout
 
-- git reset \&lt;commit\&gt; --soft/hard: regresa al commit especificado, eliminando todos los cambios que se hicieron después de ese commit.
-- git checkout \&lt;commit/branch\&gt; \&lt;filename\&gt;: permite regresar al estado en el cual se realizó un commit o branch especificado, pero no elimina lo que está en el staging area.
-- git checkout -- \&lt;filePath\&gt;: deshacer cambios en un archivo en estado modified (que ni fue agregado a staging)
+- git reset &lt;commit&gt; --soft/hard: regresa al commit especificado, eliminando todos los cambios que se hicieron después de ese commit.
+- git checkout &lt;commit/branch&gt; &lt;filename&gt;: permite regresar al estado en el cual se realizó un commit o branch especificado, pero no elimina lo que está en el staging area.
+- git checkout -- &lt;filePath&gt;: deshacer cambios en un archivo en estado modified (que ni fue agregado a staging)
 
 ### Git rm y git reset
 
@@ -109,8 +109,8 @@ Este comando nos ayuda a eliminar archivos de Git sin eliminar su historial del 
 
 git rm no puede usarse así nomás. Se debe usar uno de los flags para indicar a Git cómo eliminar los archivos que ya no se necesitan en la última versión del proyecto:
 
-- git rm --cached \&lt;archivo/s\&gt;: Elimina los archivos del área de Staging y del próximo commit pero los mantiene en nuestro disco duro.
-- git rm --force \&lt;archivo/s\&gt;: Elimina los archivos de Git y del disco duro. Git siempre guarda todo, por lo que podemos acceder al registro de la existencia de los archivos, de modo que podremos recuperarlos si es necesario (pero debemos usar comandos más avanzados).
+- git rm --cached &lt;archivo/s&gt;: Elimina los archivos del área de Staging y del próximo commit pero los mantiene en nuestro disco duro.
+- git rm --force &lt;archivo/s&gt;: Elimina los archivos de Git y del disco duro. Git siempre guarda todo, por lo que podemos acceder al registro de la existencia de los archivos, de modo que podremos recuperarlos si es necesario (pero debemos usar comandos más avanzados).
 
 #### git reset
 
@@ -119,30 +119,87 @@ git rm no puede usarse así nomás. Se debe usar uno de los flags para indicar a
 - git reset --soft: Vuelve el branch al estado del commit especificado, manteniendo los archivos en el directorio de trabajo y lo que haya en staging considerando todo como nuevos cambios. Así podemos aplicar las últimas actualizaciones a un nuevo commit.
 - git reset --hard: Borra absolutamente todo. Toda la información de los commits y del área de staging se borra del historial.
 
-![](RackMultipart20201101-4-23rntv_html_f645d81cf6468b3f.png)
+![](images/git-reset-mode.PNG)
 
-- git reset HEAD: No borra los archivos ni sus modificaciones, solo los saca del área de staging, de forma que los últimos cambios de estos archivos no se envíen al último commit. Si se cambia de opinión se los puede incluir nuevamente con git add.
+- git reset HEAD: No borra los archivos ni sus modificaciones, sólo los saca del área de staging, de forma que los últimos cambios de estos archivos no se envíen al último commit. Si se cambia de opinión se los puede incluir nuevamente con git add.
 
 ### Ramas o Branches
 
 Al crear una nueva rama se copia el último commit en esta nueva rama. Todos los cambios hechos en esta rama no se reflejarán en la rama master hasta que hagamos un merge.
 
-- git branch \&lt;new branch\&gt;: crea una nueva rama.
-- git checkout \&lt;branch name\&gt;: se mueve a la rama especificada.
-- git merge \&lt;branch name\&gt;: fusiona la rama actual con la rama especificada y crea un nuevo commit de esta fusión.
+- git branch &lt;new branch&gt;: crea una nueva rama.
+- git checkout &lt;branch name&gt;: se mueve a la rama especificada.
+- git checkout -b &lt;branch name&gt;: Crea una rama y se mueve a ella, (vendría a ser como una fusion de los 2 anteriores en un solo comando).
+- git merge &lt;branch name&gt;: fusiona la rama actual (en la que estas parado) con la rama especificada y crea un nuevo commit de esta fusión.
 - git branch: lista las ramas creadas.
+
 
 ## ¿Cómo resolver conflictos en Git?
 
-Al trabajar en dos o más ramas sobre las mismas líneas de código, ocurrirían conflictos a la hora de hacer merge. Git automáticamente nos especificará en nuestro código dónde se encuentran los conflictos.
+Al trabajar en dos o más ramas sobre las mismas líneas de código, ocurrirán conflictos a la hora de hacer merge. Git automáticamente intenta solucionar estos conflictos pero de no poder hacerlo nos especificará en nuestro código dónde se encuentran los conflictos.
 
-Para resolver este problema debemos especificar la rama de donde queremos obtener el cambio, quedarnos con esas modificaciones y realizar un commit para completar el merge.
+Cuando se encuentra en la estapa de merge, que vendría a ser como el purgatorio de los commits es decir la etapa previa a ser subidos al repositorio remoto con git push (el equivalente al cielo o la nube 😉), se han de resolver los conflictos que git no pudo resolver por su cuenta.
+
+Para resolver este problema existen las soluciones que comentaremos a continuación aunque todas se basan al final en el mismo principio.
+
+<br>
+
+### Resolucion a mano
+
+<br>
+
+Abrir los archivos que presentan diferencias con un editor de texto como notas de windows y buscar donde tenga lineas como las siguientes:
+```
+    <<<<<<HEAD
+        ...
+        ...
+        ...
+    =========
+        ***
+        ***
+    >>>>>Nombre_de_la_rama
+```
+
+Es decir el código de ambas ramas aparece mostrado, al principio el código que se encuentra en la rama HEAD (representado en este caso con puntitos) y luego separado por una fila de iguales aparece el código de la rama a mergear, que se encuentra representado con asteríscos.
+
+De esta manera se ha de dejar sólo lo que nos interesa, es decir si quisieramos quedarnos con el cambio hecho en la rama deberiamos quitar tanto la linea <<<< HEAD  como la linea >>>>>Nombre_de_la_rama, las correspondientes lineas con puntitos y la fila de iguales es decir quedaría algo así.
+
+```
+    ***
+    ***
+```
+
+Debo hacer esto con todos los cambios que me figuren que se han de resolver. 
+Una vez hecho estos cambios se ha de guardar los archivos modificados y luego hacer añadirlos al stage y commitearlos (y subirlos al repositorio remoto) para terminar de resolver el merge 
+
+<br>
+
+### Resolución utilizando Visual Studio Code
+
+<br>
+
+Una forma un poco más fácil de resolver estos conflictos, aunque en el fondo es similar, es utilizar Visual Studio Code. Este IDE nos simplifica un poquito la vida con su manejo de control de versiones, el mismo se puede utilizar a su vez para resolver conflictos generados en el merge.
+
+De esta manera al hacer uso de VS Code para resolver estos conflictos, los mismos aparecen pintados lo que facilita ver donde se encuentran, a su vez en la columna izquierda se muestran todos los archivos con conflictos, y los modificados listos para ser commiteados. 
+
+Dentro de cada archivo en la etapa que se ha de modificar aparecen diferentes opciones seleccionables las mismas son &quot;Accept Current Change&quot; que permite aceptar lo que se encuentra en el HEAD (es decir donde fusionemos las ramas (usualmente master)) y &quot;Accept Incomming Change&quot; que acepta el cambio que se encuentre en la rama a fusionar.
+
+En la siguiente imagen se puede ver mejor lo explicado
+
+![](images/vscode.PNG)
+
+Una vez resueltos los confictos en todos los archivos se han de guardar los archivos modificados y commitear los mismos, este proceso se puede realizar desde consola o con ayuda del control de versiones dentro de Visual Studio Code.
+
+A continuacion se muestra un gif que muestra como se pueden comparar los cambios y resolverlos de esta manera.
+
+![](images/merge-conflict-solve-vs-code.gif)
 
 ## Trabajar con un repositorio remoto
 
-- git remote add origin \&lt;link\&gt;: enlaza el repositorio local con el repositorio remoto.
-- git push origin \&lt;branchName\&gt;: exportar los archivos confirmados en el repositorio local al repositorio remoto.
-- git pull origin \&lt;branchName\&gt;: importa los archivos del repositorio remoto al repositorio local y al working directory.
+- git clone https://github.com/matifrancois/Git-Github.git : Clonar un repositorio remoto en tu computadora local.
+- git remote add origin &lt;link&gt;: enlaza el repositorio local con el repositorio remoto.
+- git push origin &lt;branchName&gt;: exportar los archivos confirmados en el repositorio local al repositorio remoto.
+- git pull origin &lt;branchName&gt;: importa los archivos del repositorio remoto al repositorio local y al working directory.
 - git fetch: importa los archivos remotos al repositorio local pero no al working directory.
 - git merge: una vez hecho el git fetch, hace falta hacer un git merge para que los archivos importados aparezcan en el working directory.
 
@@ -153,16 +210,16 @@ Por seguridad y practicidad, para trabajar con repositorios remotos lo ideal es 
 ## Llaves SSH
 
 1. Generar las llaves SSH. Si bien no es obligatorio, se recomienda proteger la llave privada con una contraseña cuando lo solicita el proceso de generación.
-ssh-keygen -t rsa -b 4096 -C \&lt;[tu@email.com](mailto:tu@email.com)\&gt;
+ssh-keygen -t rsa -b 4096 -C &lt;[tu@email.com](mailto:tu@email.com)&gt;
 **-t** rsa es el algoritmo elegido de cifrado (acrónimo de Rivest-Shamir-Adleman creadores del algoritmo)
 **-b** 4096 son los bits que tendrá la llave. 2048 suele ser suficiente pero con 4096 se extrema la seguridad.
-**-C** \&lt;comentario a elección\&gt;
+**-C** &lt;comentario a elección&gt;
 2. Terminar de configurar según sistema operativo.
   1. En Windows y Linux:
  # Encender el &quot;servidor&quot; de llaves SSH local:
 eval $(ssh-agent -s)
  # Añadir la llave privada SSH a este &quot;servidor&quot;:
-ssh-add \&lt;ruta-a-la-llave-privada\&gt;
+ssh-add &lt;ruta-a-la-llave-privada&gt;
   2. En Mac:
  # Encender el &quot;servidor&quot; de llaves SSH local:
 eval &quot;$(ssh-agent -s)&quot;
@@ -177,7 +234,7 @@ Host \*
 # Añadir la llave privada SSH al &quot;servidor&quot; de llaves SSH local
  # (en caso de error se puede ejecutar este mismo comando
  # pero sin el argumento -K):
-ssh-add -K \&lt;ruta-a-la-llave-privada\&gt;
+ssh-add -K &lt;ruta-a-la-llave-privada&gt;
 
 ## Conexión a GitHub con SSH
 
@@ -216,8 +273,10 @@ git tag -d nombre-del-tag
 Puedes trabajar con ramas que nunca envias a GitHub, así como pueden haber ramas importantes en GitHub que nunca usas en el repositorio local.
 
 - Crear una rama en el repositorio local:
-git branch nombre-de-la-rama o
-git checkout -b nombre-de-la-rama
+
+-git branch nombre-de-la-rama o
+
+-git checkout -b nombre-de-la-rama
 - Publicar una rama local al repositorio remoto:
 git push origin nombre-de-la-rama
 
